@@ -6,6 +6,7 @@ erDiagram
         First_name string
         Last_name string
         Registration_date timestamp
+        Participated_forms UUIDv7[] FK
     }
     Researcher {
         Researcher_id UUIDv7 PK
@@ -33,7 +34,6 @@ erDiagram
     Answer {
         Answer_id UUIDv7 PK
         Form_id UUIDv7 FK
-        User_id UUIDv7 FK
         Answer JSON
     }
 
@@ -42,4 +42,4 @@ erDiagram
     Research }|--|{ Category : належить
     Research ||--|{ Form : складається-з
     Form ||--o{ Answer : має
-    User ||--o{ Answer : надає
+    User }o--o{ Form : пройшов 
