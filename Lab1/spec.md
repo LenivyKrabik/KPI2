@@ -33,6 +33,7 @@
 
 - `Form_id`: UUIDv7 (PK)
 - `Research_id`: UUIDv7 (FK)
+- `Form_name`: string optional
 - `Questions`: JSON
 
 ### Answer:
