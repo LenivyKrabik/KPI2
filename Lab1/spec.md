@@ -13,9 +13,9 @@
 
 - `Researcher_id`: UUIDv7 (PK)
 - `User_id`: UUIDv7 (FK)
-- `OrcidD`: string (UK)
-- `ScopusID`: string (UK)
-- `Google_scholar`: string (UK)
+- `OrcidD`: string (UK) optional
+- `ScopusID`: string (UK) optional
+- `Google_scholar`: string (UK) optional
 
 ### Research:
 
@@ -44,7 +44,7 @@
 
 # Зв'язки
 
-1. #### `User` -є- `Researcher` (1/1):
+1. #### `User` -є- `Researcher` (1/1):відповідає
    - Один користувач може бути пов'язаним з один дослідником (1:1)
 2. #### `Researcher` -створює- `Research` (1..N/0..N):
    - У дослідника є будь яка кількість досліджень (1:0..N)

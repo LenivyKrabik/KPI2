@@ -10,9 +10,9 @@ erDiagram
     Researcher {
         Researcher_id UUIDv7 PK
         User_id UUIDv7 FK
-        OrcidD string UK
-        ScopusID string UK
-        Google_scholar string UK
+        OrcidD string UK "optional"
+        ScopusID string UK "optional"
+        Google_scholar string UK "optional"
     }
     Research {
         Research_id UUIDv7 PK
