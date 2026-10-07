@@ -1,0 +1,44 @@
+erDiagram
+    User {
+        UUIDv7 User_id PK
+        Email string UK
+        Password_hash string
+        First_name string
+        Last_name string
+        Registration_date timestamp
+    }
+    Researcher {
+        Researcher_id UUIDv7 PK
+        User_id UUIDv7 FK
+        OrcidD string UK
+        ScopusID string UK
+        Google_scholar string UK
+    }
+    Research {
+        Research_id UUIDv7 PK
+        Research_name string
+        Authors UUIDv7[] FK
+        Categories_id UUIDv7[] FK
+    }
+    Category {
+        Category_id UUIDv7 PK
+        Category_name string UK
+    }
+    Form {
+        Form_id UUIDv7 PK
+        Research_id UUIDv7 FK
+        Questions JSON
+    }
+    Answer {
+        Answer_id UUIDv7 PK
+        Form_id UUIDv7 FK
+        User_id UUIDv7 FK
+        Answer JSON
+    }
+
+    User ||--o| Researcher : відповідає
+    Researcher }|--o{ Research : cтворює
+    Research }|--|{ Category : належить
+    Research ||--|{ Form : складається-з
+    Form ||--o{ Answer : має
+    User ||--o{ Answer : надає
