@@ -34,7 +34,7 @@
 
 #### REQ-008 - Data export
 
-- Researcher CAN export data from research BUT only from their research
+- Researcher CAN export data from research in .xlsx, .csv or .json formats BUT only from their research
 
 #### REQ-009 - Data saving
 
