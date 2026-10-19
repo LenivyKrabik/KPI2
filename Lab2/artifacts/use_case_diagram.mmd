@@ -26,11 +26,18 @@ flowchart-elk LR
         UC10([Редагувати акаунт])
     end
 
+    subgraph Interface [Interface changes]
+        UC15([Змінити мову])
+        UC16([Збільшити розмір тексту])
+    end
+
     %%Actors to action
     Guest --> UC1
     User --> UC5
     User --> UC7
     User --> UC10
+    User --> UC15
+    User --> UC16
     RegUser --> UC2
     Researcher --> UC3
     Researcher --> UC4

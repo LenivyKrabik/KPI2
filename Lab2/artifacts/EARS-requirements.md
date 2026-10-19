@@ -68,6 +68,10 @@
 
 - User SHALL be able to find and complete researches not leaving the main page
 
+#### REQ-017 - Easy change of language
+
+- Language change option SHALL be on main page
+
 ### Security
 
 #### REQ-013 - Data falsification
