@@ -1,0 +1,44 @@
+flowchart-elk LR
+    %%В mermaid немає іконок людей в класах окрім usecase, який не усюди підтримується, кружечки - найбільш схоже, що я зміг знайти
+    User((User))
+    RegUser((Regular<br/>user))
+    Researcher((Researcher))
+    Guest((Guest))
+    Exporter((Exporter<br/>system))
+
+    subgraph Researches [Research manipulation]
+        UC3([Створити дослідження])
+        UC4([Створити форму])
+        UC5([Пройти форму])
+        UC6([Експортувати дослідження])
+        UC8([Закрити дослідження])
+        UC9([Парсинг форми])
+    end
+
+    subgraph Account [Account works]
+        UC1([Зареєструватися])
+        UC2([Підвищити акааунт до дослідника])
+        UC7([Видалити аккаунт])
+        UC10([Редагувати акаунт])
+    end
+
+    %%Actors to action
+    Guest --> UC1
+    User --> UC5
+    User --> UC7
+    User --> UC10
+    RegUser --> UC2
+    Researcher --> UC3
+    Researcher --> UC4
+    Researcher --> UC6
+    Researcher --> UC8
+    Exporter --> UC9
+
+
+    %%Actors to actors (В mermaids flowchart немає гарної порожньої стрілочки, зжальтесь надімною, I beg you Speed, I need this)
+    RegUser --> User
+    Researcher --> User
+
+    %%Action to action
+    UC7 -.->|«extend»| UC10
+    UC6 -.->|«include»| UC9
