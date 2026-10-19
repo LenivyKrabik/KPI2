@@ -40,6 +40,14 @@
 
 - System SHALL save form answers
 
+#### REQ-015 - Research editting
+
+- Researcher CAN edit their research information, which includes deletion and closing new answers acception
+
+#### REQ-016 - Form editting
+
+- Researcher CAN edit their researches forms, which includes deletion
+
 ---
 
 ## Non-functional

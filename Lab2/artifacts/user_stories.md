@@ -86,3 +86,16 @@ Scenario: Export data
     When : I try to export data
     Then : The system gives me file with all of the answers data
 ```
+
+#### Story-004 - Complete research
+
+**As a** Researcher, **I want to** fix a typo in name of my research, **so that** nobody would lught at my for it
+
+```gherkin
+Scenario: Edit research
+    Given : I am registered user
+    And : Have researcher account
+    And : Have a research
+    When : I edit my researches name
+    Then : The research name changes to a new one
+```

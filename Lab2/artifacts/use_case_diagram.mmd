@@ -13,6 +13,10 @@ flowchart-elk LR
         UC6([Експортувати дослідження])
         UC8([Закрити дослідження])
         UC9([Парсинг форми])
+        UC11([Редагувати дослідження])
+        UC12([Редагувати форму])
+        UC13([Видалити дослідження])
+        UC14([Видалити форму])
     end
 
     subgraph Account [Account works]
@@ -33,6 +37,10 @@ flowchart-elk LR
     Researcher --> UC6
     Researcher --> UC8
     Exporter --> UC9
+    Researcher --> UC11
+    Researcher --> UC12
+    Researcher --> UC13
+    Researcher --> UC14
 
 
     %%Actors to actors (В mermaids flowchart немає гарної порожньої стрілочки, зжальтесь надімною, I beg you Speed, I need this)
@@ -42,3 +50,6 @@ flowchart-elk LR
     %%Action to action
     UC7 -.->|«extend»| UC10
     UC6 -.->|«include»| UC9
+    UC13 -.->|«extend»| UC11
+    UC14 -.->|«extend»| UC12
+    UC8 -.->|«extend»| UC11
