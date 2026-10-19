@@ -83,7 +83,8 @@ Scenario: Export data
     Given : I am registered user
     And : Have researcher account
     And : Have a research with some amount of answers
-    When : I try to export data and choose .csv format
+    When : I try to export data
+    And : Choose .csv export format
     Then : The system gives me file research.csv with all of the answers data
 ```
 
