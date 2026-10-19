@@ -19,3 +19,8 @@
 | REQ-015 - Research editting       |     |     |     |     |     |     |     | +   |     |      | +    |      | +    |      |      |      |
 | REQ-016 - Form editting           |     |     |     |     |     |     |     |     |     |      |      | +    |      | +    |      |      |
 | REQ-017 - Easy change of language |     |     |     |     |     |     |     |     |     |      |      |      |      |      | +    |      |
+
+# Uncovered Reqiurements:
+
+- **`REQ-12 - Simplisity  `** - It is requirement depends on design choices and can not be properly explained with use case
+- **`REQ-13 - Data falsification`** - It is conencted with security in code. Thus can not be properly explained with use cases
