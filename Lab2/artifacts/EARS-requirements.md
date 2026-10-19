@@ -66,7 +66,7 @@
 
 #### REQ-012 - Simplisity
 
-- Interface SHALL be understanable and have minimal elements amount
+- User SHALL be able to find and complete researches not leaving the main page
 
 ### Security
 
