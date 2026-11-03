@@ -1,0 +1,36 @@
+sequenceDiagram
+    autonumber
+    actor User
+    participant Frontend
+    participant Backend
+    participant Scopus as Scopus Search API
+
+    %%Google scollar way
+    User->>+Frontend: Apply for researcher account with Google Scholar
+    Frontend->>User: Ask whether to use account email or enter other
+
+    alt Choose account email
+        User->>Frontend: Choose account email
+    else Choose other email
+        User->>Frontend: Choose other email and enter it
+    end
+    Frontend->>+Backend: Verify email
+    deactivate Frontend
+    Backend->>User: Send verification link
+    User->>+Frontend: Go to verification link
+    Frontend->>Backend: Confirm email ownership
+    deactivate Frontend
+    Backend->>Backend: Save Google Scholar of User
+
+    %%Scopus stuff
+    Backend->>Scopus: Serch for Scopus ID with this Email
+    alt Scopus ID exist
+        Scopus->>Backend: Returns ScopusID
+        Backend->>Backend: Save Scopus ID fo User
+    else Scpus ID doesn't exist
+        Scopus->>Backend: Return "No results found"
+    end
+
+    Backend->>+Frontend: Finish verifying
+    deactivate Backend
+    Frontend->>User: Show authorization finished
