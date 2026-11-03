@@ -1,0 +1,41 @@
+sequenceDiagram
+    autonumber
+    actor User
+    participant Frontend
+    participant Backend
+    participant Scopus as Scopus Search API
+
+    %%Google scollar way
+    User->>+Frontend: Apply for researcher account with Google Scholar
+    Frontend->>User: Ask whether to use account email or enter other
+
+    alt Choose account email
+        User->>Frontend: Choose account email
+    else Choose other email
+        User->>Frontend: Choose other email and enter it (email)
+    end
+    Frontend->>+Backend: POST /auth/googlescolar (email)
+    deactivate Frontend
+    Backend->>User: Send one-time verification link to email
+    User->>+Frontend: Go to verification link
+    Frontend->>Backend: POST /auth/googlescolar/confirm<br/>(email, unique code)
+    Backend->>Backend: Save Google Scholar of User
+
+    %%Scopus stuff
+    Backend->>-Frontend: Finish verifying
+    Frontend->>User: Show authorization finished
+    opt Connect Scopus
+        User->>Frontend: Connect linked Scopus account
+        Frontend->>+Backend: GET /auth/scopus/googlescolar (userid)
+        Backend->>+Scopus: GET https://api.elsevier.com/content/search/author<br/>?query=EMAIL-ADDR(email)
+        alt Scopus ID exist
+            Scopus->>Backend: (Scopus ID)
+            Backend->>Backend: Save Scopus ID fo User
+        else Scpus ID doesn't exist
+            Scopus->>-Backend: Return "No results found"
+        end
+        Backend->>Frontend: Share results of scopus linking
+        deactivate Backend
+        Frontend->>User: Share results of scopus linking
+        deactivate Frontend
+    end
