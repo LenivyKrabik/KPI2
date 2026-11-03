@@ -17,23 +17,28 @@ sequenceDiagram
     Orcid->>+Frontend: Redirects and sends AUTH TOKEN
     deactivate Orcid
     Frontend->>+Backend: Sends AUTH TOKEN
-    deactivate Frontend
     Backend->>+Orcid: Asks for access tokens
     Orcid->>-Backend: Access tokens
     Backend->>+Orcid: Ask for OrcidID
     Orcid->>-Backend: User's OrcidID
     Backend->>Backend: Save OrcidID of User
-
-    %%Scopus stuff
-    Backend->>+Scopus: Serch for Scopus ID with this OrcidID
-
-    alt Scopus ID exist
-        Scopus->>Backend: Returns ScopusID
-        Backend->>Backend: Save Scopus ID fo User
-    else Scpus ID doesn't exist
-        Scopus->>-Backend: Return "No results found"
-    end
-
-    Backend->>+Frontend: Finish verifying
+    Backend->>Frontend: Finish verifying
     deactivate Backend
     Frontend->>User: Show authorization finished
+    %%Scopus stuff
+    opt Connect Scopus
+        User->>Frontend: Connect linked Scopus account
+        Frontend->>+Backend: Connect linked Scopus account
+        Backend->>+Scopus: Serch for Scopus ID with this OrcidID
+
+        alt Scopus ID exist
+            Scopus->>Backend: Returns ScopusID
+            Backend->>Backend: Save Scopus ID fo User
+        else Scpus ID doesn't exist
+            Scopus->>-Backend: Return "No results found"
+        end
+        Backend->>Frontend: Share results of scopus linking
+        deactivate Backend
+        Frontend->>User: Share results of scopus linking
+        deactivate Frontend
+    end
