@@ -18,8 +18,6 @@ if (What account to verify with?) then (Google scholar)
     :Send confirmation email;
     |User|
     :Confirm email;
-    |System|
-    :Recieve confirmation;
 
 else (Orcid)
     |User|
