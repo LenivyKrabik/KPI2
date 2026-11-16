@@ -1,0 +1,50 @@
+@startuml
+|User|
+|System|
+|Orcid|
+|Scopus|
+
+|User|
+start
+:Ask for account upgrade;
+if (What account to verify with?) then (Google scholar)
+    |User|
+    :Enter Google Schollar email;
+    fork
+        |User|
+        :Recieve confirmation email; <<input>> 
+        :Confirm email; <<output>> 
+        end
+    fork again
+        |System|
+        :Send confirmation email; <<output>> 
+        :Recieve confirmation ; <<input>> 
+    end merge
+
+else (Orcid)
+    |User|
+    :Enter Orcid credentials;
+    |Orcid|
+    :Verify credentials and return OrcidID;
+
+endif
+fork
+    |User|
+    if (Connect Scopus?) then (No)
+    else (Yes)
+        |Scopus|
+        :Search for Scopus ID;
+        |System|
+        :Save Scopus ID; <<output>>
+    endif
+
+fork again
+    |System|
+    :Save credentials; <<output>>
+    end
+
+end merge
+
+|User|
+stop
+@enduml 
