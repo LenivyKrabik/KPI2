@@ -1,0 +1,44 @@
+sequenceDiagram
+    autonumber
+    actor User
+    participant Frontend
+    participant Backend
+    participant Orcid as Orcid OAuth
+    participant Scopus as Scopus Search API
+
+    %%Orcid way
+    User->>+Frontend: Apply for researcher account with Orcid
+    Frontend->>+Orcid: GET https://orcid.org/oauth/authorize
+    deactivate Frontend
+    
+
+    Orcid->>User: Show Orcid login page and consent form
+    User->>Orcid: Give Orcid credentials and consents
+    Orcid->>+Frontend: Redirects to CALLBACK_URL with AUTH TOKEN
+    deactivate Orcid
+    Frontend->>+Backend: POST /auth/orcidid (AUTH TOKEN)
+    Backend->>+Orcid: POST https://orcid.org/oauth/token
+    Orcid->>-Backend: (Access tokens)
+    Backend->>+Orcid: GET OrcidID
+    Orcid->>-Backend: (OrcidID)
+    Backend->>Backend: Save OrcidID of User
+    Backend->>Frontend: Finish verifying
+    deactivate Backend
+    Frontend->>User: Show "Authorization finished"
+    %%Scopus stuff
+    opt Connect Scopus
+        User->>Frontend: Connect linked Scopus account
+        Frontend->>+Backend: GET /auth/scopus/orcidid (userid)
+        Backend->>+Scopus: GET https://api.elsevier.com/content/search/author<br/>?query=ORCID(ORCIDID)
+
+        alt Scopus ID exist
+            Scopus->>Backend: (Scopus ID)
+            Backend->>Backend: Save Scopus ID fo User
+        else Scpus ID doesn't exist
+            Scopus->>-Backend: Return "No results found"
+        end
+        Backend->>Frontend: Share results of scopus linking
+        deactivate Backend
+        Frontend->>User: Share results of scopus linking
+        deactivate Frontend
+    end
