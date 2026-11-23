@@ -19,6 +19,7 @@ component Backend {
 
   component ResearchManager
   component AccountManager
+  component NotificationService
 }
 database DB
 
@@ -58,6 +59,8 @@ AccountManager ---> "SQL out"
 OrcidService --> "Orcid API"
 ScopusService --> "Scopus API"
 
-AccountManager --> "Email out"
+ResearchManager ..> NotificationService
+AccountManager ..> NotificationService
+NotificationService --> "Email out"
 
 @enduml

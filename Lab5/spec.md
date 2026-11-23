@@ -28,11 +28,11 @@ OAuth сервіс Orcid, через який відбуваєтсья підт�
 
 Сервіс який відповідає за комунікацію з Scopus
 
-## AccountManagerService
+## AccountManager
 
 Менедженр аккаунтів
 
-## ResearchManagerService
+## ResearchManager
 
 Менеджер досліджень та їх форм
 
@@ -43,6 +43,10 @@ OAuth сервіс Orcid, через який відбуваєтсья підт�
 ## DB
 
 Тяжко повірити, але це БД
+
+## NotificationService
+
+Сервіс який займається відправкою повідомлень
 
 # Критерії прийому
 
