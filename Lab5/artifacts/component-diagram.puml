@@ -9,16 +9,16 @@ component Backend {
   portin "HTTP in"
   portout "SQL out"
   portout "Email out"
-  port "Orcid connection"
-  port "Scopus connection"
+  port "Orcid API"
+  port "Scopus API"
 
   component Router
 
   component OrcidService
   component ScopusService
 
-  component ResearchManagerService
-  component AccountManagerService
+  component ResearchManager
+  component AccountManager
 }
 database DB
 
@@ -39,25 +39,25 @@ SQL )-- DB
 "Email out" -- EmailAPI
 EmailAPI )-- Email 
 
-"Orcid connection" -up- OrcidOAuth
+"Orcid API" -up- OrcidOAuth
 OrcidOAuth )-up- Orcid
 
-"Scopus connection" -up- ScopusAPI
+"Scopus API" -up- ScopusAPI
 ScopusAPI )-up- Scopus
 
 
 "HTTP in" --> Router
 Router ..> OrcidService
 Router ..> ScopusService
-Router ..> ResearchManagerService
-Router ..> AccountManagerService
+Router ..> ResearchManager
+Router ..> AccountManager
 
-ResearchManagerService ---> "SQL out"
-AccountManagerService ---> "SQL out"
+ResearchManager ---> "SQL out"
+AccountManager ---> "SQL out"
 
-OrcidService --> "Orcid connection"
-ScopusService --> "Scopus connection"
+OrcidService --> "Orcid API"
+ScopusService --> "Scopus API"
 
-AccountManagerService --> "Email out"
+AccountManager --> "Email out"
 
 @enduml
