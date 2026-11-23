@@ -48,8 +48,6 @@ ScopusAPI )-up- Scopus
 
 
 "HTTP in" --> Router
-Router ..> OrcidService
-Router ..> ScopusService
 Router ..> ResearchManager
 Router ..> AccountManager
 
@@ -62,5 +60,8 @@ ScopusService --> "Scopus API"
 ResearchManager ..> NotificationService
 AccountManager ..> NotificationService
 NotificationService --> "Email out"
+
+AccountManager ..> OrcidService
+AccountManager ..> ScopusService
 
 @enduml
