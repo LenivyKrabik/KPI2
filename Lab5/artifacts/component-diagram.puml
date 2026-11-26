@@ -1,0 +1,67 @@
+@startuml
+
+User as User
+[UI]
+[Orcid] as "Orcid OAuth" <<external>>
+[Scopus] as "Scopus" <<external>>
+[Email] as "Email provider" <<external>>
+component Backend {
+  portin "HTTP in"
+  portout "SQL out"
+  portout "Email out"
+  port "Orcid API"
+  port "Scopus API"
+
+  component Router
+
+  component OrcidService
+  component ScopusService
+
+  component ResearchManager
+  component AccountManager
+  component NotificationService
+}
+database DB
+
+() EmailAPI as "Email API"
+() ScopusAPI as "Scopus API"
+() OrcidOAuth as "OAuth"
+() RestAPI as "Rest API"
+() SQL
+
+User --> UI
+
+UI --( RestAPI
+"HTTP in" -up- RestAPI
+
+"SQL out" -- SQL
+SQL )-- DB
+
+"Email out" -- EmailAPI
+EmailAPI )-- Email 
+
+"Orcid API" -up- OrcidOAuth
+OrcidOAuth )-up- Orcid
+
+"Scopus API" -up- ScopusAPI
+ScopusAPI )-up- Scopus
+
+
+"HTTP in" --> Router
+Router ..> ResearchManager
+Router ..> AccountManager
+
+ResearchManager ---> "SQL out"
+AccountManager ---> "SQL out"
+
+OrcidService --> "Orcid API"
+ScopusService --> "Scopus API"
+
+ResearchManager ..> NotificationService
+AccountManager ..> NotificationService
+NotificationService --> "Email out"
+
+AccountManager ..> OrcidService
+AccountManager ..> ScopusService
+
+@enduml
